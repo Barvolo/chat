@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Analysis Results</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+<div class="container">
+  <h2>Analysis Results</h2>
+  <div class="alert alert-success">
+    <strong>Average Monthly Cost:</strong> {{ average_cost|round(2) }} USD
+  </div>
+  <div class="alert {{ 'alert-success' if total_savings > 0 else 'alert-danger' }}">
+    <strong>Total Savings:</strong> {{ total_savings|round(2) }} USD
+  </div>
+  <div class="table-responsive">
+    {{ results_table|safe }}
+  </div>
+  <div class="details-toggle">
+    <button id="toggleDetails" class="btn">Show Details</button>
+  </div>
+  <div id="detailsContent" class="details-content">
+    <!-- Detailed savings analysis list -->
+    {% for month in savings_analysis %}
+      <div class="alert {{ 'alert-success' if month.savings > 0 else 'alert-danger' }}">
+        <strong>{{ month.date }}:</strong>
+        {{ month.savings|round(2) }} USD
+      </div>
+    {% endfor %}
+  </div>
+</div>
+</body>
+</html>
+
