@@ -28,11 +28,12 @@
   {% endif %}
   
   <div class="alert alert-success">
-    <strong>Average Monthly Cost:</strong> {{ average_cost|round(2) }} USD
+      <strong>Average Monthly Cost:</strong> {{ average_cost|round(2) }} USD / GPT-turbo: {{ average_turbo|round(2) }} USD
   </div>
   <div class="alert {{ 'alert-success' if total_savings > 0 else 'alert-danger' }}">
-    <strong>Total Savings:</strong> {{ total_savings|round(2) }} USD
+      <strong>Total Savings:</strong> {{ total_savings|round(2) }} USD / GPT-turbo: {{ turbo_saving|round(2) }} USD
   </div>
+
 
   <!-- Button to toggle visibility of the charts and table -->
   <button id="toggleDetails" class="btn">Show Details</button>
