@@ -5,6 +5,16 @@
 <title>Analysis Results</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Pass data to JavaScript -->
+<script>
+  // Data for the bar chart
+  var chartLabels = {{ chart_labels | tojson | safe }};
+  var chartData = {{ chart_data | tojson | safe }};
+  
+  // Data for the pie chart
+  var modelUsageLabels = {{ model_usage_labels | tojson | safe }};
+  var modelUsageData = {{ model_usage_data | tojson | safe }};
+</script>
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
@@ -24,12 +34,17 @@
     <strong>Total Savings:</strong> {{ total_savings|round(2) }} USD
   </div>
 
-  <!-- Button to toggle visibility of the chart and table -->
+  <!-- Button to toggle visibility of the charts and table -->
   <button id="toggleDetails" class="btn">Show Details</button>
   
-  <!-- Chart container -->
+  <!-- Bar Chart container -->
   <div id="chartContainer" style="display: none;">
     <canvas id="detailsChart"></canvas>
+  </div>
+  
+  <!-- New Pie Chart container -->
+  <div id="pieChartContainer" style="display: none;">
+    <canvas id="modelUsageChart"></canvas>
   </div>
   
   <!-- Table of results, initially hidden -->
@@ -39,12 +54,5 @@
     </div>
   </div>
 </div>
-
-<!-- Pass data to JavaScript -->
-<script>
-  var chartLabels = {{ chart_labels | tojson | safe }};
-  var chartData = {{ chart_data | tojson | safe }};
-</script>
-
 </body>
 </html>
